@@ -39,6 +39,9 @@ removeNthElement :: Int -> [a] -> [a]
 removeNthElement _ [] = []
 removeNthElement n xs = take n xs ++ drop (n+1) xs
 
+processReport :: [Int] -> Bool
+processReport report = reportSafe report || dampenProblems report
+
 main = do
     reports <- getLinesFromFile "input.txt"
-    print $ length $ filter id (dampenProblems <$> map formatReport reports)
+    print $ length $ filter id (processReport <$> map formatReport reports)
